@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from surdoapp.surdoadmin.models import SurdoWord
+from surdoapp.admin_side.models import SurdoWord
 
 class SurdoWordListSerializer(serializers.ModelSerializer):
     class Meta:

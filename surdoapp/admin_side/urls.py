@@ -1,6 +1,6 @@
 from django.urls import path
 
-from surdoapp.surdoadmin import views
+from surdoapp.admin_side import views
 
 urlpatterns = [
     path('', views.WordListView.as_view(), name='words_list'),

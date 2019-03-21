@@ -4,13 +4,13 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
-from surdoapp.surdoadmin.models import SurdoWord
-from surdoapp.surdoadmin.forms import SurdoWordForm
+from surdoapp.admin_side.models import SurdoWord
+from surdoapp.admin_side.forms import SurdoWordForm
 
 
 @method_decorator([login_required(login_url='/django-admin/login')], name='dispatch')
 class WordListView(ListView):
-    template_name = 'surdoadmin/words_list.html'
+    template_name = 'admin_side/words_list.html'
     model = SurdoWord
 
     def get_context_data(self, **kwargs):
@@ -22,7 +22,7 @@ class WordListView(ListView):
 @method_decorator([login_required(login_url='/django-admin/login')], name='dispatch')
 class WordFormView(FormView):
     form_class = SurdoWordForm
-    template_name = 'surdoadmin/word_form.html'
+    template_name = 'admin_side/word_form.html'
 
     def get_initial(self):
         initial = super(WordFormView, self).get_initial()

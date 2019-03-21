@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'crispy_forms',
-    'surdoapp.surdoadmin',
+    'surdoapp.admin_side',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,36 @@
+{% extends 'surdoadmin/base_admin.html' %}
+{% block title %}
+    Surdo Word
+{% endblock %}
+
+{{ word.word }}
+
+{% block content %}
+    {% load crispy_forms_tags %}
+    <article class="content item-editor-page">
+        <div class="title-block">
+            <h3 class="title"> {% if word %}
+                Update
+                {% else %}
+                Create
+                {% endif %}
+                Word
+                <span class="sparkline bar" data-type="bar"></span>
+            </h3>
+        </div>
+
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="card card-block">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form|crispy }}
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Save</button>
+            <a href="#" class="btn btn-secondary"><i class="fa fa-minus-circle"></i> Cancel</a>
+            {% if word %}
+                <a href="{% url 'word_delete' word.id %}" class="btn btn-danger"><i class="fa fa-remove"></i> Delete</a>
+            {% endif %}
+        </form>
+    </article>
+
+{% endblock %}

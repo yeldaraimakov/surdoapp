@@ -5,5 +5,9 @@ from ..models import SurdoWord
 
 
 class SurdoWordsByCategory(generics.ListAPIView):
-    queryset = SurdoWord.objects.all()
     serializer_class = SurdoWordListSerializer
+
+    def get_queryset(self):
+        category = self.kwargs['cat']
+        queryset = SurdoWord.objects.filter(category=category)
+        return queryset

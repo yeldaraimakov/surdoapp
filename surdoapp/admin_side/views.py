@@ -14,8 +14,13 @@ class WordListView(ListView):
     model = SurdoWord
 
     def get_context_data(self, **kwargs):
+        category = self.request.GET.get('cat')
         context = super().get_context_data(**kwargs)
-        context['words'] = SurdoWord.objects.all()
+        context['cat'] = category
+        if category is None:
+            context['words'] = SurdoWord.objects.all()
+        else:
+            context['words'] = SurdoWord.objects.filter(category=category)
         return context
 
 

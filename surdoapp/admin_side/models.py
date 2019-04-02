@@ -2,12 +2,15 @@ from django.db import models
 
 
 class SurdoWord(models.Model):
-    TIME, NATION = range(0, 2)
-    CATEGORIES = ((TIME, 'time'), (NATION, 'nation'),)
+    TIME, ALPHABET, ACQUAINTANCE, HUMAN, FAMILY, MONTHS, DAYS, NATURE, SEASONS = range(0, 9)
+    CATEGORIES = ((TIME, 'Время, календарь'), (ALPHABET, 'Алфавит'), (ACQUAINTANCE, 'Знакомство'),
+                  (HUMAN, 'Человек'), (FAMILY, 'Семья'), (MONTHS, 'Названия месяцев'), (DAYS, 'Дни недели'),
+                  (NATURE, 'Природа'), (SEASONS, 'Времена года'), )
 
-    name = models.CharField(max_length=255)
-    category = models.IntegerField(choices=CATEGORIES)
-    video_link = models.CharField(max_length=255)
+    name_ru = models.CharField('Название (рус)', max_length=255)
+    name_kz = models.CharField('Название (каз)', max_length=255)
+    category = models.IntegerField('Категория', choices=CATEGORIES, default=TIME)
+    video_link = models.CharField('Ссылка на ютуб', max_length=255, blank=True, null=True)
 
     def update(self, data):
         instance = SurdoWord.objects.get(id=self.id)
@@ -15,4 +18,3 @@ class SurdoWord(models.Model):
         instance.category = data.get('category')
         instance.video_link = data.get('video_link')
         instance.save()
-

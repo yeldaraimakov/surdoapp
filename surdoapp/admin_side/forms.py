@@ -4,7 +4,7 @@ from .models import SurdoWord
 
 
 class SurdoWordForm(forms.ModelForm):
-    initial_fields = ['name', 'category', 'video_link', ]
+    initial_fields = ['name_ru', 'name_kz', 'category', 'video_link', ]
 
     def __init__(self, *args, **kwargs):
         initial = kwargs.get('initial')
@@ -17,5 +17,11 @@ class SurdoWordForm(forms.ModelForm):
 
     class Meta:
         model = SurdoWord
-        fields = ['name', 'category', 'video_link', ]
+        fields = ['name_ru', 'name_kz', 'category', 'video_link', ]
 
+
+class CreateWordsListForm(forms.Form):
+    category = forms.ChoiceField(label='Категория', choices=SurdoWord.CATEGORIES)
+    name_ru_list = forms.CharField(label='Наименование (рус)', widget=forms.Textarea)
+    name_kz_list = forms.CharField(label='Наименование (каз)', widget=forms.Textarea)
+    links_list = forms.CharField(label='Ссылка на ютуб', widget=forms.Textarea, required=False)

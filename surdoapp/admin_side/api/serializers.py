@@ -6,4 +6,4 @@ from surdoapp.admin_side.models import SurdoWord
 class SurdoWordListSerializer(serializers.ModelSerializer):
     class Meta:
         model = SurdoWord
-        fields = ('id', 'name_ru', 'name_kz', 'video_link',)
+        fields = ('id', 'name_ru', 'name_kz', 'video_link_ru', 'video_link_kz',)

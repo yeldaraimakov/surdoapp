@@ -65,7 +65,8 @@ def create_words_list(request):
         category = request.POST.get('category')
         name_ru_list = request.POST.get('name_ru_list').split('\n')
         name_kz_list = request.POST.get('name_kz_list').split('\n')
-        links_list = request.POST.get('links_list').split('\n')
+        links_ru_list = request.POST.get('links_ru_list').split('\n')
+        links_kz_list = request.POST.get('links_kz_list').split('\n')
 
         for i in range(len(name_ru_list)):
             name_ru = name_ru_list[i].strip()
@@ -74,11 +75,16 @@ def create_words_list(request):
             except IndexError:
                 continue
 
-            link = ''
-            if len(links_list) > i:
-                link = links_list[i].strip()
+            link_ru = ''
+            if len(links_ru_list) > i:
+                link_ru = links_ru_list[i].strip()
 
-            word = SurdoWord(category=category, name_kz=name_kz, name_ru=name_ru, video_link=link)
+            link_kz = ''
+            if len(links_kz_list) > i:
+                link_kz = links_kz_list[i].strip()
+
+            word = SurdoWord(category=category, name_kz=name_kz, name_ru=name_ru,
+                             video_link_ru=link_ru, video_link_kz=link_kz)
             word.save()
 
         return redirect(reverse('words_list'))
